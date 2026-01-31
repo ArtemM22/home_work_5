@@ -6,7 +6,7 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
     """
     Генеруємо всі дійсні числа з тексту, що записані через пробіли
     """
-    pattern = r"\b\d+\.\d+\b"
+    pattern = r" \d+\.\d+ "
 
     for match in re.findall(pattern, text):
         yield float(match)
