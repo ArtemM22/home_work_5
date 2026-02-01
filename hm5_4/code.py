@@ -46,13 +46,13 @@ def show_all(_: list, contacts: Dict[str, str]) -> str:
 
 
 def parse_input(user_input: str):
-    try:
-        parts = user_input.split()
-        command = parts[0].lower()
-        args = parts[1:]
-        return command, args
-    except IndexError:
+    parts = user_input.split()
+    if not parts:
         return "", []
+
+    command = parts[0].lower()
+    args = parts[1:]
+    return command, args
 
 
 def main():
@@ -67,16 +67,15 @@ def main():
             break
 
         command, args = parse_input(user_input)
+        if not command:
+            print("Enter a command.")
+            continue
 
         if command in commands:
             result = commands[command](args, contacts)
             print(result)
         else:
             print("Unknown command.")
-
-        if not command:
-            print("Enter a command.")
-            continue
-
+            
 if __name__ == "__main__":
     main()
